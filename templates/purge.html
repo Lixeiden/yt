@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Yout - purge</title>
+</head>
+<body>
+<h1>Purge</h1>
+<a href='/'>Back</a>
+<form method="POST">
+    <select name="selectFile">
+        <option selected value="default">Choose file to del</option>
+        <!--  jinja for cycle- option value and caption from os.files ? -->
+        <option value="file1">File1</option>
+    </select>
+    <input type="submit" value="Purge">
+</form>
+
+</body>
+</html>

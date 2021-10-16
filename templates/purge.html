@@ -10,11 +10,11 @@
 <form method="POST">
     <select name="selectFile">
         <option selected value="default">Choose file to del</option>
-        <!--  jinja for cycle- option value and caption from os.files ? -->
-        <option value="file1">File1</option>
+        {% for item in fileList %}
+            <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
     </select>
     <input type="submit" value="Purge">
 </form>
-
 </body>
 </html>

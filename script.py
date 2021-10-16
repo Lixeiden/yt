@@ -8,5 +8,4 @@ def Download(videoUrl, format):
     }
 
     with open(f'./videos/{videoUrl[-11:]}_log.txt', 'a') as logFile:
-        subprocess.run(
-            ['youtube-dl', '--format', *mode[format],'--output', './videos/%(uploader)s-%(title)s-%(id)s.%(ext)s', videoUrl], stdout=logFile, stderr=logFile)
+        subprocess.run(['youtube-dl', '--format', *mode[format],'--output', './videos/%(uploader)s-%(title)s-%(id)s.%(ext)s', videoUrl], stdout=logFile, stderr=logFile)

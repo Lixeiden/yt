@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import script
 
 def create_app(testing: bool=True):
@@ -9,6 +9,7 @@ def create_app(testing: bool=True):
     def index():
         if request.method == 'POST' and request.form['videoUrl']:
             script.Download(videoUrl=request.form['videoUrl'], format=request.form['selectFormat'])
+            return redirect(url_for('list'))
         return render_template('index.html')
 
 

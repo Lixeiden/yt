@@ -6,4 +6,4 @@ Jinja2==3.0.2
 MarkupSafe==2.0.1
 pkg_resources==0.0.0
 Werkzeug==2.0.2
-youtube-dl==2021.6.6
+youtube-dl==2021.12.17

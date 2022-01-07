@@ -9,8 +9,11 @@
 <form method="POST">
     <select name="selectFile">
         <option selected value="default">Choose file to del</option>
-        {% for item in fileList %}
+        {% for item in fileListVideos %}
             <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+        {% for item in fileListLogs %}
+            <option value="logs/{{ item }}">[LOG] {{ item }}</option>
         {% endfor %}
     </select>
     <input type="submit" value="Purge">

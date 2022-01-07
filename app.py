@@ -18,7 +18,7 @@ def create_app(testing: bool = True):
         if request.method == 'POST' and request.form['selectFile'] != 'default':
             selectedFile = request.form['selectFile']  # variable to avoid escaping in f-string
             os.remove(f'./videos/{selectedFile}')
-        return render_template('purge.html', fileList=os.listdir('./videos'))
+        return render_template('purge.html', fileListVideos=[f for f in os.listdir('./videos') if os.path.isfile(os.path.join('./videos', f))], fileListLogs=[f for f in os.listdir('./videos/logs') if os.path.isfile(os.path.join('./videos/logs', f))])
 
     @app.route('/list')
     def list():

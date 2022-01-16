@@ -1,0 +1,8 @@
+body, input, select, a {
+  background-color: black;
+  color: #FFD700;
+  font-size: 150%;
+}
+input, select {
+    border: medium dashed red;
+}

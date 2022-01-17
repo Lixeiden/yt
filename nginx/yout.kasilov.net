@@ -27,7 +27,7 @@ server {
 		autoindex_exact_size off;
 		charset utf-8;
 	}
-	location /static/ {
-	root /home/lix/yout.kasilov.net/static;
-    }
+#	location /static/ {
+#	root /home/lix/yout.kasilov.net/static;
+#    }
 }

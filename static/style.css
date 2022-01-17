@@ -4,5 +4,6 @@ body, input, select, a {
   font-size: 150%;
 }
 input, select {
-    border: medium dashed red;
+    border: medium dashed #FFD700;
+    color: red;
 }

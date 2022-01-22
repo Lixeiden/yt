@@ -34,9 +34,11 @@ def create_app(testing: bool = True):
     def logs():
         return render_template('logs.html', fileListLogs = fileListLogs)
 
-    @app.route('/list/logs/logview-.gitkeep')
-    def logview():
-        return render_template('logview.html')
+    @app.route('/list/logs/logview-<string:filename>')
+    def logview(filename):
+        with open(f'./videos/logs/{filename}', 'r') as f:
+            data_from_file = f.read()
+        return render_template('logview.html', filename = filename, logtext = data_from_file)
 
     return app
 

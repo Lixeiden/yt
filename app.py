@@ -28,6 +28,10 @@ def create_app(testing: bool = True):
     def list():
         return render_template('list.html')
 
+    @app.route('/list/logs')
+    def logs():
+        return render_template('logs.html')
+
     return app
 
 # if __name__ == '__main__':

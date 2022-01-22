@@ -10,3 +10,6 @@ input, select {
 input::placeholder {
     opacity: 0.2;
 }
+span {
+    white-space: pre-wrap
+}

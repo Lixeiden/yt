@@ -7,3 +7,6 @@ input, select {
     border: medium dashed #FFD700;
     color: red;
 }
+input::placeholder {
+    opacity: 0.2;
+}

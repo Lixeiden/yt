@@ -8,8 +8,10 @@
 <body>
 <h1>List</h1>
 <ul>
-  <li><a href='/list/logs'>[LOGs]</a></li>
-  <li>File link as name / size</li>
+    <li><a href='/list/logs'>[LOGs]</a></li>
+    {% for item in fileListVideos %}
+        <li><a href='list/{{ item }}'> {{ item }} / {size} </a></li>
+    {% endfor %}
 </ul>
 <a href='/'>Back</a>
 </body>

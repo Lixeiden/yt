@@ -31,3 +31,6 @@ server {
 #	root /home/lix/yout.kasilov.net/static;
 #    }
 }
+
+#nginx- запрос list/{{file}}
+#обрабатывается как alias videdos/{{file}}

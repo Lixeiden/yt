@@ -8,7 +8,9 @@
 <body>
 <h1>Logs</h1>
 <ul>
-  <li>File link as name / size</li>
+    {% for item in fileListLogs %}
+        <li><a href='logs/logview-{{ item }}'> [LOG] {{ item }} / {size} </a></li>
+    {% endfor %}
 </ul>
 <a href='/'>Back</a>
 </body>

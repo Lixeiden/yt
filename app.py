@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 import os, glob
 import script
 
+fileListLogs = [f for f in os.listdir('./videos/logs') if os.path.isfile(os.path.join('./videos/logs', f))]
+fileListVideos = [f for f in os.listdir('./videos') if os.path.isfile(os.path.join('./videos', f))]
 
 def create_app(testing: bool = True):
     app = Flask(__name__)
@@ -22,15 +24,19 @@ def create_app(testing: bool = True):
                     os.remove(f)
             else:
                 os.remove(f'./videos/{selectedFile}')
-        return render_template('purge.html', fileListVideos=[f for f in os.listdir('./videos') if os.path.isfile(os.path.join('./videos', f))], fileListLogs=[f for f in os.listdir('./videos/logs') if os.path.isfile(os.path.join('./videos/logs', f))])
+        return render_template('purge.html', fileListVideos = fileListVideos, fileListLogs = fileListLogs)
 
     @app.route('/list')
     def list():
-        return render_template('list.html')
+        return render_template('list.html', fileListVideos = fileListVideos)
 
     @app.route('/list/logs')
     def logs():
-        return render_template('logs.html')
+        return render_template('logs.html', fileListLogs = fileListLogs)
+
+    @app.route('/list/logs/logview-.gitkeep')
+    def logview():
+        return render_template('logview.html')
 
     return app
 

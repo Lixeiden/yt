@@ -19,7 +19,7 @@ server {
                 alias /home/lix/yout.kasilov.net/robots.txt;
     }
 
-	location /list {
+	location /video {
 		try_files $uri $uri/ =404;
 		alias /home/lix/yout.kasilov.net/videos;
 		charset utf-8;

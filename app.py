@@ -4,6 +4,9 @@ import script
 
 fileListLogs = [f for f in os.listdir('./videos/logs') if os.path.isfile(os.path.join('./videos/logs', f))]
 fileListVideos = [f for f in os.listdir('./videos') if os.path.isfile(os.path.join('./videos', f))]
+logsSizes = [(f, os.stat(f'./videos/logs/{f}').st_size) for f in fileListLogs]
+videoSizes = [(f, os.stat(f'./videos/{f}').st_size) for f in fileListVideos]
+
 
 def create_app(testing: bool = True):
     app = Flask(__name__)
@@ -28,11 +31,11 @@ def create_app(testing: bool = True):
 
     @app.route('/list')
     def list():
-        return render_template('list.html', fileListVideos = fileListVideos)
+        return render_template('list.html', videoSizes = videoSizes)
 
     @app.route('/list/logs')
     def logs():
-        return render_template('logs.html', fileListLogs = fileListLogs)
+        return render_template('logs.html', logsSizes = logsSizes)
 
     @app.route('/list/logs/logview-<string:filename>')
     def logview(filename):

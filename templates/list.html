@@ -9,8 +9,8 @@
 <h1>List</h1>
 <ul>
     <li><a href='/list/logs'>[LOGs]</a></li>
-    {% for item in fileListVideos %}
-        <li><a href='list/{{ item }}'> {{ item }} / {size} </a></li>
+    {% for file, size in videoSizes %}
+        <li><a href='list/{{ file }}'> {{ file }} / [{{ size }}] </a></li>
     {% endfor %}
 </ul>
 <a href='/'>Back</a>

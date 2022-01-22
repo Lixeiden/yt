@@ -9,28 +9,32 @@ server {
                 proxy_set_header X-Real-IP $remote_addr;
                 add_header P3P 'CP="ALL DSP COR PSAa PSDa OUR NOR ONL UNI COM NAV"';
                 add_header Access-Control-Allow-Origin *;
-        }
+    }
 
-        location = /favicon.ico {
+    location = /favicon.ico {
                 alias /home/lix/yout.kasilov.net/favicon.ico;
-        }
+    }
 
-        location = /robots.txt {
+    location = /robots.txt {
                 alias /home/lix/yout.kasilov.net/robots.txt;
-        }
+    }
 
 	location /list {
 		try_files $uri $uri/ =404;
 		alias /home/lix/yout.kasilov.net/videos;
-		#index index.html;
-		autoindex on;
-		autoindex_exact_size off;
 		charset utf-8;
 	}
+
+#	location /list {
+#		try_files $uri $uri/ =404;
+#		alias /home/lix/yout.kasilov.net/videos;
+#		#index index.html;
+#		autoindex on;
+#		autoindex_exact_size off;
+#		charset utf-8;
+#	}
+#
 #	location /static/ {
 #	root /home/lix/yout.kasilov.net/static;
-#    }
+#   }
 }
-
-#nginx- запрос list/{{file}}
-#обрабатывается как alias videdos/{{file}}

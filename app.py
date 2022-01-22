@@ -2,10 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for
 import os, glob
 import script
 
-fileListLogs = [f for f in os.listdir('./videos/logs') if os.path.isfile(os.path.join('./videos/logs', f))]
-fileListVideos = [f for f in os.listdir('./videos') if os.path.isfile(os.path.join('./videos', f))]
-logsSizes = [(f, os.stat(f'./videos/logs/{f}').st_size) for f in fileListLogs]
-videoSizes = [(f, os.stat(f'./videos/{f}').st_size) for f in fileListVideos]
+
+def dir_listing(path):
+    return [(f, os.stat(f'{path}/{f}').st_size) for f in [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]]
 
 
 def create_app(testing: bool = True):
@@ -20,6 +19,8 @@ def create_app(testing: bool = True):
 
     @app.route('/purge', methods=['POST', 'GET'])
     def purge():
+        fileListVideosAndSizes = dir_listing('./videos')
+        fileListLogsAndSizes = dir_listing('./videos/logs')
         if request.method == 'POST' and request.form['selectFile'] != 'default':
             selectedFile = request.form['selectFile']  # variable to avoid escaping in f-string
             if selectedFile == 'ALL logs':
@@ -27,15 +28,17 @@ def create_app(testing: bool = True):
                     os.remove(f)
             else:
                 os.remove(f'./videos/{selectedFile}')
-        return render_template('purge.html', fileListVideos = fileListVideos, fileListLogs = fileListLogs)
+        return render_template('purge.html', fileListVideosAndSizes = fileListVideosAndSizes, fileListLogsAndSizes = fileListLogsAndSizes)
 
     @app.route('/list')
     def list():
-        return render_template('list.html', videoSizes = videoSizes)
+        fileListVideosAndSizes = dir_listing('./videos')
+        return render_template('list.html', fileListVideosAndSizes = fileListVideosAndSizes)
 
     @app.route('/list/logs')
     def logs():
-        return render_template('logs.html', logsSizes = logsSizes)
+        fileListLogsAndSizes = dir_listing('./videos/logs')
+        return render_template('logs.html', fileListLogsAndSizes = fileListLogsAndSizes)
 
     @app.route('/list/logs/logview-<string:filename>')
     def logview(filename):

@@ -8,7 +8,7 @@
 <body>
 <h1>Logs</h1>
 <ul>
-    {% for file, size in logsSizes %}
+    {% for file, size in fileListLogsAndSizes %}
         <li><a href='logs/logview-{{ file }}'> [LOG] {{ file }} / [{{ size }}] </a></li>
     {% endfor %}
 </ul>

@@ -19,8 +19,6 @@ def create_app(testing: bool = True):
 
     @app.route('/purge', methods=['POST', 'GET'])
     def purge():
-        fileListVideosAndSizes = dir_listing('./videos')
-        fileListLogsAndSizes = dir_listing('./videos/logs')
         if request.method == 'POST' and request.form['selectFile'] != 'default':
             selectedFile = request.form['selectFile']  # variable to avoid escaping in f-string
             if selectedFile == 'ALL logs':
@@ -28,6 +26,8 @@ def create_app(testing: bool = True):
                     os.remove(f)
             else:
                 os.remove(f'./videos/{selectedFile}')
+        fileListVideosAndSizes = dir_listing('./videos')
+        fileListLogsAndSizes = dir_listing('./videos/logs')
         return render_template('purge.html', fileListVideosAndSizes = fileListVideosAndSizes, fileListLogsAndSizes = fileListLogsAndSizes)
 
     @app.route('/list')

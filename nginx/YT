@@ -1,7 +1,7 @@
 server {
 	listen 80;
 	listen [::]:80;
-	server_name yout.kasilov.net;
+	server_name yout.grafr.ru;
 
 	location / {
                 proxy_pass http://127.0.0.1:8002;
@@ -12,22 +12,22 @@ server {
     }
 
     location = /favicon.ico {
-                alias /home/lix/yout.kasilov.net/favicon.ico;
+                alias /home/YT/favicon.ico;
     }
 
     location = /robots.txt {
-                alias /home/lix/yout.kasilov.net/robots.txt;
+                alias /home/YT/robots.txt;
     }
 
 	location /video {
 		try_files $uri $uri/ =404;
-		alias /home/lix/yout.kasilov.net/videos;
+		alias /home/YT/videos;
 		charset utf-8;
 	}
 
 #	location /list {
 #		try_files $uri $uri/ =404;
-#		alias /home/lix/yout.kasilov.net/videos;
+#		alias /home/YT/videos;
 #		#index index.html;
 #		autoindex on;
 #		autoindex_exact_size off;
@@ -35,6 +35,6 @@ server {
 #	}
 #
 #	location /static/ {
-#	root /home/lix/yout.kasilov.net/static;
+#	root /home/YT/static;
 #   }
 }

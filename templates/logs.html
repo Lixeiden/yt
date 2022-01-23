@@ -9,9 +9,9 @@
 <h1>Logs</h1>
 <ul>
     {% for file, size in fileListLogsAndSizes %}
-        <li><a href='logs/logview-{{ file }}'> [LOG] {{ file }} / [{{ size }}] </a></li>
+        <li><a href='logs/logview-{{ file }}'> [LOG] {{ file }} / [{{ size | filesizeformat }}] </a></li>
     {% endfor %}
 </ul>
-<a href='/list'>Back</a>
+<a href='/list'>BACK</a>
 </body>
 </html>

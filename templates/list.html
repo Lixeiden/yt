@@ -10,9 +10,9 @@
 <ul>
     <li><a href='/list/logs'>[LOGs]</a></li>
     {% for file, size in fileListVideosAndSizes %}
-        <li><a href='video/{{ file }}'> {{ file }} / [{{ size }}] </a></li>
+        <li><a href='video/{{ file }}'> {{ file }} / [{{ size | filesizeformat }}] </a></li>
     {% endfor %}
 </ul>
-<a href='/'>Back</a>
+<a href='/'>BACK</a>
 </body>
 </html>

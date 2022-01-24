@@ -1,0 +1,19 @@
+[Unit]
+Description=YT gunicorn
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/home/YT
+Environment="PATH=/home/YT/venv/bin"
+ExecStart=/home/YT/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers=3 \
+          --threads=2 \
+          --worker-class=gthread \
+          --bind=127.0.0.1:8002 \
+          'app:create_app(testing=False)'
+
+[Install]
+WantedBy=multi-user.target

@@ -6,7 +6,7 @@ After=network.target
 User=root
 Group=www-data
 WorkingDirectory=/home/YT
-Environment="PATH=/home/YT/venv/bin"
+Environment="PATH=/home/YT/venv/bin:/usr/bin"
 ExecStart=/home/YT/venv/bin/gunicorn \
           --access-logfile - \
           --workers=3 \

@@ -11,3 +11,4 @@ Deployment (w/o Docker):
 6. nginx config to /etc/nginx/sites-available + softlink + nginx -t + restart
 7. /etc/systemd/system/YT.service + systemctl start YT + systemctl status YT // source gunicorn_start.sh
 8. remove .gitkeeps
+9. apt install ffmpeg ?

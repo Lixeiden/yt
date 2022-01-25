@@ -14,6 +14,12 @@ ExecStart=/home/YT/venv/bin/gunicorn \
           --worker-class=gthread \
           --bind=127.0.0.1:8002 \
           'app:create_app(testing=False)'
+# ExecStart=/bin/su "/opt/app/bin/service"
+# ExecStop=/opt/app/bin/service shutdown
+# We rely on systemd, to restart service if it dies against its will
+Restart=on-failure
+# Give a reasonable amount of time for the server to start up/shut down
+TimeoutSec=30
 
 [Install]
 WantedBy=multi-user.target

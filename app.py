@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, abort
 import os, glob
 import script
 
@@ -42,8 +42,12 @@ def create_app(testing: bool = True):
 
     @app.route('/list/logs/logview-<string:filename>')
     def logview(filename):
-        with open(f'./videos/logs/{filename}', 'r') as f:
-            data_from_file = f.read()
+        try:
+            with open(f'./videos/logs/{filename}', 'r') as f:
+                data_from_file = f.read()
+        except FileNotFoundError:
+            data_from_file = 'ERROR: File not found'
+            abort(404)
         return render_template('logview.html', filename = filename, logtext = data_from_file)
 
     return app

@@ -12,4 +12,4 @@ Deployment (w/o Docker):
 * /etc/systemd/system/YT.service + systemctl start YT + systemctl status YT // source gunicorn_start.sh
 * remove .gitkeeps
 * apt install ffmpeg
-* firewall: open ssh ???? & http 80 port
+* firewall: open ssh <xxxx> port & open http <80> port

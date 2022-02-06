@@ -13,3 +13,10 @@ input::placeholder {
 span {
     white-space: pre-wrap
 }
+#logs_hyperlink {
+    color: red;
+}
+a {
+    display: inline-block;
+    margin: 10px;
+}

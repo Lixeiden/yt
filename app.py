@@ -4,7 +4,7 @@ import script
 
 
 def dir_listing(path):
-    return [(f, os.stat(f'{path}/{f}').st_size) for f in [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]]
+    return sorted([(f, os.stat(f'{path}/{f}').st_size) for f in [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]])
 
 
 def create_app(testing: bool = True):

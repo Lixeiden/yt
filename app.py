@@ -5,10 +5,10 @@ import script
 def dir_listing(path):
     return sorted([(f, os.stat(f'{path}/{f}').st_size) for f in [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]])
 
-def df():
+def df(): # return list [free_disk_space, total_disk_space]
     path = '/'
     res = os.statvfs(path)
-    return res.f_bavail * res.f_frsize  # Free blocks available to non-super user * Fundamental file system block size, bytes
+    return [res.f_bavail * res.f_frsize, res.f_blocks * res.f_frsize]  # Free blocks available to non-super user * Fundamental file system block size, Total number of blocks in the filesystem * Fundamental file system block size; bytes
 
 
 def create_app(testing: bool = True):
@@ -19,7 +19,7 @@ def create_app(testing: bool = True):
         if request.method == 'POST' and request.form['videoUrl']:
             script.Download(videoUrl=request.form['videoUrl'], format=request.form['selectFormat'])
             return redirect(url_for('list'))
-        return render_template('index.html', diskFreeSpace = df())
+        return render_template('index.html', diskFreeSpaceAndTotal = df())
 
     @app.route('/purge', methods=['POST', 'GET'])
     def purge():

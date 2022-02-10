@@ -20,3 +20,6 @@ a {
     display: inline-block;
     margin: 10px;
 }
+.freeSpace {
+    border: medium dashed #FFD700;
+}

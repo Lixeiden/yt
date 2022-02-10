@@ -17,6 +17,6 @@
 </form>
 <a href="/list">LIST</a>
 <a href="/purge">PURGE</a>
-FREE: {{ diskFreeSpace | filesizeformat }}
+<span class="freeSpace"> FREE: {{ diskFreeSpaceAndTotal[0] | filesizeformat }} / {{ diskFreeSpaceAndTotal[1] | filesizeformat }} </span>
 </body>
 </html>

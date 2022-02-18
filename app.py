@@ -2,14 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, abort
 import os, glob
 import script
 
-def dir_listing(path):
-    return sorted([(f, os.stat(f'{path}/{f}').st_size) for f in [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]])
-
-def df(): # return list [free_disk_space, total_disk_space]
-    path = '/'
-    res = os.statvfs(path)
-    return [res.f_bavail * res.f_frsize, res.f_blocks * res.f_frsize]  # Free blocks available to non-super user * Fundamental file system block size, Total number of blocks in the filesystem * Fundamental file system block size; bytes
-
 
 def create_app(testing: bool = True):
     app = Flask(__name__)
@@ -19,7 +11,7 @@ def create_app(testing: bool = True):
         if request.method == 'POST' and request.form['videoUrl']:
             script.Download(videoUrl=request.form['videoUrl'], format=request.form['selectFormat'])
             return redirect(url_for('list'))
-        return render_template('index.html', diskFreeSpaceAndTotal = df())
+        return render_template('index.html', diskFreeSpaceAndTotal = script.df())
 
     @app.route('/purge', methods=['POST', 'GET'])
     def purge():
@@ -30,18 +22,18 @@ def create_app(testing: bool = True):
                     os.remove(f)
             else:
                 os.remove(f'./videos/{selectedFile}')
-        fileListVideosAndSizes = dir_listing('./videos')
-        fileListLogsAndSizes = dir_listing('./videos/logs')
+        fileListVideosAndSizes = script.dir_listing('./videos')
+        fileListLogsAndSizes = script.dir_listing('./videos/logs')
         return render_template('purge.html', fileListVideosAndSizes = fileListVideosAndSizes, fileListLogsAndSizes = fileListLogsAndSizes)
 
     @app.route('/list')
     def list():
-        fileListVideosAndSizes = dir_listing('./videos')
+        fileListVideosAndSizes = script.dir_listing('./videos')
         return render_template('list.html', fileListVideosAndSizes = fileListVideosAndSizes)
 
     @app.route('/list/logs')
     def logs():
-        fileListLogsAndSizes = dir_listing('./videos/logs')
+        fileListLogsAndSizes = script.dir_listing('./videos/logs')
         return render_template('logs.html', fileListLogsAndSizes = fileListLogsAndSizes)
 
     @app.route('/list/logs/logview-<string:filename>')

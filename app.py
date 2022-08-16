@@ -20,6 +20,12 @@ def create_app(testing: bool = True):
             if selectedFile == 'ALL logs':
                 for f in glob.glob('./videos/logs/*'):
                     os.remove(f)
+            elif selectedFile == 'ALL vids':
+                for f in glob.glob('./videos/*'):
+                    try:
+                        os.remove(f)
+                    except IsADirectoryError:
+                        pass
             else:
                 os.remove(f'./videos/{selectedFile}')
         fileListVideosAndSizes = script.dir_listing('./videos')

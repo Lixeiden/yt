@@ -18,18 +18,15 @@ def create_app(testing: bool = True):
         if request.method == 'POST' and request.form['selectFile'] != 'default':
             selectedFile = request.form['selectFile']  # variable to avoid escaping in f-string
             if selectedFile == 'ALL logs':
-                for f in glob.glob('./videos/logs/*'):
+                for f in glob.glob('./logs/*'):
                     os.remove(f)
             elif selectedFile == 'ALL vids':
                 for f in glob.glob('./videos/*'):
-                    try:
-                        os.remove(f)
-                    except IsADirectoryError:
-                        pass
+                    os.remove(f)
             else:
                 os.remove(f'./videos/{selectedFile}')
         fileListVideosAndSizes = script.dir_listing('./videos')
-        fileListLogsAndSizes = script.dir_listing('./videos/logs')
+        fileListLogsAndSizes = script.dir_listing('./logs')
         return render_template('purge.html', fileListVideosAndSizes = fileListVideosAndSizes, fileListLogsAndSizes = fileListLogsAndSizes)
 
     @app.route('/list')
@@ -39,13 +36,13 @@ def create_app(testing: bool = True):
 
     @app.route('/list/logs')
     def logs():
-        fileListLogsAndSizes = script.dir_listing('./videos/logs')
+        fileListLogsAndSizes = script.dir_listing('./logs')
         return render_template('logs.html', fileListLogsAndSizes = fileListLogsAndSizes)
 
     @app.route('/list/logs/logview-<string:filename>')
     def logview(filename):
         try:
-            with open(f'./videos/logs/{filename}', 'r') as f:
+            with open(f'./logs/{filename}', 'r') as f:
                 data_from_file = f.read()
         except FileNotFoundError:
             data_from_file = 'ERROR: File not found'

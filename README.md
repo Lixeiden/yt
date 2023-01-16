@@ -1,9 +1,8 @@
 # YT
-Python 3.8 + Flask 2.0.2 
-http://yout.grafr.ru
+Flask App for video download based on yt-dlp
 
-Deployment (w/o Docker):
-* git clone https://github.com/Lixeiden/YT.git
+Deployment:
+* git clone https://github.com/Lixeiden/yt.git
 * python3.8 -m venv venv
 * source ./venv/bin/activate
 * pip install pip --upgrade

@@ -16,7 +16,8 @@ def Download(videoUrl, format):
 
     mode = {
         'best': ['', ],
-        'audio': ['--format', 'bestaudio']
+        'audio': ['--format', 'bestaudio'],
+        '720p': ['--format', '22']
     }
 
     with open(f'./logs/{videoUrl[-11:]}_log.txt', 'a') as logFile:

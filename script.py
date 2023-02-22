@@ -21,5 +21,5 @@ def Download(videoUrl, format):
         '720p': ['--format', '22']
     }
 
-    with open(f'./logs/{videoUrl[-11:]}_log.txt', 'a') as logFile:
+    with open(f'{settings.logsDir}/{videoUrl[-11:]}_log.txt', 'a') as logFile:
         subprocess.run(['yt-dlp', *mode[format], '--output', f'{settings.videosDir}/[%(uploader)s] %(title)s [%(id)s].%(ext)s', videoUrl], stdout=logFile, stderr=logFile)

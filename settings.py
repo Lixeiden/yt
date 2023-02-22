@@ -1,2 +1,2 @@
 videosDir = './videos'
-logsDir = ''
+logsDir = './logs'

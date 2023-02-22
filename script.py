@@ -20,4 +20,4 @@ def Download(videoUrl, format):
     }
 
     with open(f'./logs/{videoUrl[-11:]}_log.txt', 'a') as logFile:
-        subprocess.run(['yt-dlp', *mode[format], '--output', './videos/%(uploader)s-%(title)s-%(id)s.%(ext)s', videoUrl], stdout=logFile, stderr=logFile)
+        subprocess.run(['yt-dlp', *mode[format], '--output', './videos/[%(uploader)s] %(title)s [%(id)s].%(ext)s', videoUrl], stdout=logFile, stderr=logFile)

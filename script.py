@@ -15,9 +15,10 @@ def df():  # return list [free_disk_space, total_disk_space]
 def Download(videoUrl, format):
 
     mode = {
-        'best': ['bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio', '--merge-output-format', 'mp4'],
-        'audio': ['140', ]
+        'best': ['', ],
+        'audio': ['--format', 'bestaudio'],
+        '720p': ['--format', '22']
     }
 
     with open(f'./logs/{videoUrl[-11:]}_log.txt', 'a') as logFile:
-        subprocess.run(['yt-dlp', '--format', *mode[format], '--output', './videos/%(uploader)s-%(title)s-%(id)s.%(ext)s', videoUrl], stdout=logFile, stderr=logFile)
+        subprocess.run(['yt-dlp', *mode[format], '--output', './videos/[%(uploader)s] %(title)s [%(id)s].%(ext)s', videoUrl], stdout=logFile, stderr=logFile)

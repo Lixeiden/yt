@@ -15,7 +15,7 @@ def df():  # return list [free_disk_space, total_disk_space]
 def Download(videoUrl, format):
 
     mode = {
-        'best': ['bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio', '--merge-output-format', 'mp4'],
+        'best': ['', ],
         'audio': ['--format', 'bestaudio']
     }
 

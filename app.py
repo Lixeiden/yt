@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, abort
 import os, glob
 import script
-
+import settings
 
 def create_app(testing: bool = True):
     app = Flask(__name__)
@@ -21,17 +21,17 @@ def create_app(testing: bool = True):
                 for f in glob.glob('./logs/*'):
                     os.remove(f)
             elif selectedFile == 'ALL vids':
-                for f in glob.glob('./videos/*'):
+                for f in glob.glob(f'{settings.videosDir}/*'):
                     os.remove(f)
             else:
-                os.remove(f'./videos/{selectedFile}')
-        fileListVideosAndSizes = script.dir_listing('./videos')
+                os.remove(f'{settings.videosDir}/{selectedFile}')
+        fileListVideosAndSizes = script.dir_listing(settings.videosDir)
         fileListLogsAndSizes = script.dir_listing('./logs')
         return render_template('purge.html', fileListVideosAndSizes = fileListVideosAndSizes, fileListLogsAndSizes = fileListLogsAndSizes)
 
     @app.route('/list')
     def list():
-        fileListVideosAndSizes = script.dir_listing('./videos')
+        fileListVideosAndSizes = script.dir_listing(settings.videosDir)
         return render_template('list.html', fileListVideosAndSizes = fileListVideosAndSizes)
 
     @app.route('/list/logs')

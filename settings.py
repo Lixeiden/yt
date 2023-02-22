@@ -1,0 +1,2 @@
+videosDir = './videos'
+logsDir = ''

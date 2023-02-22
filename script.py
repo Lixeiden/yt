@@ -8,7 +8,7 @@ def dir_listing(path):
 
 
 def df():  # return list [free_disk_space, total_disk_space]
-    path = '/'
+    path = settings.videosDir
     res = os.statvfs(path)
     return [res.f_bavail * res.f_frsize, res.f_blocks * res.f_frsize]  # Free blocks available to non-super user * Fundamental file system block size, Total number of blocks in the filesystem * Fundamental file system block size; bytes
 

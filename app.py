@@ -24,7 +24,10 @@ def create_app(testing: bool = True):
                 for f in glob.glob(f'{settings.videosDir}/*'):
                     os.remove(f)
             else:
-                os.remove(f'{settings.videosDir}/{selectedFile}')
+                try:
+                    os.remove(f'{settings.videosDir}/{selectedFile}')
+                except FileNotFoundError:
+                    os.remove(f'{settings.logsDir}/{selectedFile}')
         fileListVideosAndSizes = script.dir_listing(settings.videosDir)
         fileListLogsAndSizes = script.dir_listing(settings.logsDir)
         return render_template('purge.html', fileListVideosAndSizes = fileListVideosAndSizes, fileListLogsAndSizes = fileListLogsAndSizes)

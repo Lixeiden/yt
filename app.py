@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, abort
-import os, glob
+import os
+import glob
 import script
 import settings
+
 
 def create_app(testing: bool = True):
     app = Flask(__name__)
@@ -9,9 +11,9 @@ def create_app(testing: bool = True):
     @app.route('/', methods=['POST', 'GET'])
     def index():
         if request.method == 'POST' and request.form['videoUrl']:
-            script.Download(videoUrl=request.form['videoUrl'], format=request.form['selectFormat'])
+            script.download(videoURLs=request.form['videoUrl'], formatSelector=request.form['selectFormat'])
             return redirect(url_for('list'))
-        return render_template('index.html', diskFreeSpaceAndTotal = script.df())
+        return render_template('index.html', diskFreeSpaceAndTotal=script.df())
 
     @app.route('/purge', methods=['POST', 'GET'])
     def purge():

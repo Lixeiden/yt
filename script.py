@@ -4,6 +4,7 @@ from yt_dlp.utils import DownloadError
 from yt_dlp.utils import YoutubeDLError
 import os
 import settings
+import time
 
 
 def dir_listing(path):
@@ -25,11 +26,10 @@ def download(videoURLs, formatSelector, dwnOptions=settings.defaultOptions.copy(
     }
 
     # Setting up logging
-    logger = logging.getLogger('yt-dlp_func')
-    logger.handlers = []  # clearing, to avoid duplicating logger every time when function download() get called
+    logger = logging.getLogger(f'yt-dlp_func_{time.time()}')  # generate unique logger name
     logger.setLevel(logging.DEBUG)
     handler = logging.FileHandler(f'{settings.logsDir}/{videoURLs[-11:]}_log.txt')
-    handler.setFormatter(logging.Formatter('%(asctime)s [%(name)s] %(levelname)s %(message)s'))
+    handler.setFormatter(logging.Formatter('%(asctime)s %(message)s'))  # [%(name)s] %(levelname)s
     logger.addHandler(handler)
 
     if formatSelector != 'best':
@@ -45,3 +45,7 @@ def download(videoURLs, formatSelector, dwnOptions=settings.defaultOptions.copy(
             dwnOptions['outtmpl'] = settings.shortFilenameTemplate
             with YoutubeDL(dwnOptions) as ydl:
                 ydl.download(videoURLs)
+
+    # Clean up the logger
+    handler.close()
+    logger.removeHandler(handler)

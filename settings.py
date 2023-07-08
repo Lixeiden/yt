@@ -6,5 +6,6 @@ shortFilenameTemplate = f'{videosDir}/[%(uploader)s] %(title).50s [%(id)s].%(ext
 
 defaultOptions = {
     'outtmpl': defaultFilenameTemplate,
-#    'restrictfilenames': True
+    'no_color': True,
+#   'restrictfilenames': True
 }

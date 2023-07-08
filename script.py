@@ -17,12 +17,12 @@ def df():  # return list [free_disk_space, total_disk_space]
     return [res.f_bavail * res.f_frsize, res.f_blocks * res.f_frsize]  # Free blocks available to non-super user * Fundamental file system block size, Total number of blocks in the filesystem * Fundamental file system block size; bytes
 
 
-def download(videoURLs, formatSelector, dwnOptions=settings.defaultOptions.copy()):
+def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOptions.copy()):
 
     formatTranslate = {
         'best': '',
+        '720p': '22',
         'audio': 'bestaudio',
-        '720p': '22'
     }
 
     # Setting up logging
@@ -49,3 +49,9 @@ def download(videoURLs, formatSelector, dwnOptions=settings.defaultOptions.copy(
     # Clean up the logger
     handler.close()
     logger.removeHandler(handler)
+
+
+if __name__ == "__main__":
+    user_url = input("URL: ")
+    download(user_url)
+

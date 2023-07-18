@@ -1,0 +1,28 @@
+body, input, select, a {
+  background-color: black;
+  color: #FFD700;
+  font-size: 150%;
+}
+input, select {
+    border: medium dashed #FFD700;
+    color: red;
+}
+input[type=submit], select {
+    border: thin solid #FFD700;
+}
+input::placeholder {
+    opacity: 0.2;
+}
+span {
+    white-space: pre-wrap
+}
+#logs_hyperlink {
+    color: red;
+}
+a {
+    display: inline-block;
+    margin: 10px;
+}
+.freeSpace {
+    border: medium dashed #FFD700;
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YT - list</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>List</h1>
+<ul>
+    <li><a href='/list/logs' id="logs_hyperlink">[LOGs]</a></li>
+    {% for file, size in fileListVideosAndSizes %}
+        <li><a href='video/{{ file }}'> {{ file }} / [{{ size | filesizeformat }}] </a></li>
+    {% endfor %}
+</ul>
+<a href='/'>BACK</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YT - purge</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>Purge</h1>
+<form method="POST">
+    <select name="selectFile">
+        <option selected value="default">Choose file to del</option>
+        {% for fileandsize in fileListVideosAndSizes %} <option value="{{ fileandsize[0] }}">{{ fileandsize[0] }}</option> {% endfor %}
+        {% for fileandsize in fileListLogsAndSizes %} <option value="{{ fileandsize[0] }}">[LOG] {{ fileandsize[0] }}</option> {% endfor %}
+        <option value="ALL logs">[LOG] all logs</option>
+        <option value="ALL vids">ALL VIDS</option>
+    </select>
+    <input type="submit" value="Purge">
+</form>
+<a href='/'>BACK</a>
+</body>
+</html>

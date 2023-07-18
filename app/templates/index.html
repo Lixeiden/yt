@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YT</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>YT</h1>
+<form method="POST">
+    <input name="videoUrl" type="text" placeholder="YT video/playlist/channel id" size="35">
+    <select name="selectFormat">
+        <option selected value='best'>Best quality video</option>
+        <option value='720p'>720p video</option>
+        <option value='audio'>Audio only</option>
+    </select>
+    <input type="submit" value="Download">
+</form>
+<a href="/list">LIST</a>
+<a href="/purge">PURGE</a>
+<span class="freeSpace"> FREE: {{ diskFreeSpaceAndTotal[0] | filesizeformat }} / {{ diskFreeSpaceAndTotal[1] | filesizeformat }} </span>
+</body>
+</html>

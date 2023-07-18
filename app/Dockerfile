@@ -4,6 +4,9 @@ FROM python:3.10-slim-buster
 # Аргумент сборки для определения окружения
 ARG ENV
 
+# переменная среды ENV
+ENV ENV=${ENV}
+
 # рабочий каталог в /app
 WORKDIR /app
 

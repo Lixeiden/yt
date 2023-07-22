@@ -20,7 +20,7 @@ def df():  # return list [free_disk_space, total_disk_space]
 def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOptions.copy()):
 
     formatTranslate = {
-        'best': '',
+        'best': 'bestvideo+bestaudio/best',
         '720p': '22',
         'audio': 'bestaudio',
     }
@@ -32,8 +32,7 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
     handler.setFormatter(logging.Formatter('%(asctime)s %(message)s'))  # [%(name)s] %(levelname)s
     logger.addHandler(handler)
 
-    if formatSelector != 'best':
-        dwnOptions['format'] = formatTranslate[formatSelector]
+    dwnOptions['format'] = formatTranslate[formatSelector]
     dwnOptions['logger'] = logger
 
     try:
@@ -54,4 +53,3 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
 if __name__ == "__main__":
     user_url = input("URL: ")
     download(user_url)
-

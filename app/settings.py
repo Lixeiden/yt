@@ -5,6 +5,7 @@ defaultFilenameTemplate = f'{videosDir}/[%(uploader)s] %(title)s [%(id)s].%(ext)
 shortFilenameTemplate = f'{videosDir}/[%(uploader)s] %(title).50s [%(id)s].%(ext)s'
 
 defaultOptions = {
+    'format': 'bestvideo+bestaudio/best',
     'outtmpl': defaultFilenameTemplate,
     'no_color': True,
 #   'restrictfilenames': True

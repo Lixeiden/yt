@@ -7,13 +7,15 @@ ARG ENV
 # переменная среды ENV
 ENV ENV=${ENV}
 
-# рабочий каталог в /app
 WORKDIR /app
 
 # файл requirements.txt из локального каталога в рабочий каталог в контейнере
 COPY requirements.txt requirements.txt
 
-# pip и зависимости
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN pip install pip -U && pip install --no-cache-dir -r requirements.txt
 
 # все файлы из локального каталога в рабочий каталог в контейнере, исключая файлы, указанные в .dockerignore

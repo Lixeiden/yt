@@ -1,7 +1,5 @@
 .idea/
 TODO.txt
-systemd_old/
 nginx_old/
-varlogs_old/
 .env
 nginx/server_name.conf

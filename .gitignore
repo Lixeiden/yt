@@ -4,4 +4,4 @@ systemd_old/
 nginx_old/
 varlogs_old/
 .env
-nginx/server.conf
+nginx/server_name.conf

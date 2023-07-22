@@ -16,7 +16,7 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - "8002:80"
+      - "80:80"
     volumes:
       - type: bind
         source: ${VIDEO_PATH}

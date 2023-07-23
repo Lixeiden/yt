@@ -29,9 +29,6 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
     dwnOptions['format'] = settings.formatTranslate[formatSelector]
     dwnOptions['logger'] = logger
 
-    # def replace_hook(status):
-    #     if status['status'] == 'downloading':
-    #         status['filename'] = status['filename'].replace('#', 'N')
     def replace_hook(status):
         if status['status'] == 'finished':
             new_filename = status['filename'].replace('#', 'N')

@@ -10,3 +10,9 @@ defaultOptions = {
     'no_color': True,
 #   'restrictfilenames': True
 }
+
+formatTranslate = {
+        'best': 'bestvideo+bestaudio/best',
+        '720p': '22',
+        'audio': 'bestaudio',
+    }

@@ -19,12 +19,6 @@ def df():  # return list [free_disk_space, total_disk_space]
 
 def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOptions.copy()):
 
-    formatTranslate = {
-        'best': 'bestvideo+bestaudio/best',
-        '720p': '22',
-        'audio': 'bestaudio',
-    }
-
     # Setting up logging
     logger = logging.getLogger(f'yt-dlp_func_{time.time()}')  # generate unique logger name
     logger.setLevel(logging.DEBUG)
@@ -32,7 +26,7 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
     handler.setFormatter(logging.Formatter('%(asctime)s %(message)s'))  # [%(name)s] %(levelname)s
     logger.addHandler(handler)
 
-    dwnOptions['format'] = formatTranslate[formatSelector]
+    dwnOptions['format'] = settings.formatTranslate[formatSelector]
     dwnOptions['logger'] = logger
 
     try:
@@ -52,4 +46,5 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
 
 if __name__ == "__main__":
     user_url = input("URL: ")
-    download(user_url)
+    user_format = input(f"format {{{', '.join(settings.formatTranslate.keys())}}}: ")
+    download(videoURLs=user_url, formatSelector=user_format)

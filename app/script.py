@@ -29,6 +29,16 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
     dwnOptions['format'] = settings.formatTranslate[formatSelector]
     dwnOptions['logger'] = logger
 
+    # def replace_hook(status):
+    #     if status['status'] == 'downloading':
+    #         status['filename'] = status['filename'].replace('#', 'N')
+    def replace_hook(status):
+        if status['status'] == 'finished':
+            new_filename = status['filename'].replace('#', 'N')
+            os.rename(status['filename'], new_filename)
+
+    dwnOptions['progress_hooks'] = [replace_hook]
+
     try:
         with YoutubeDL(dwnOptions) as ydl:
             ydl.download(videoURLs)

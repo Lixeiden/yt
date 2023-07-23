@@ -11,7 +11,11 @@ def create_app(testing: bool = True):
     @app.route('/', methods=['POST', 'GET'])
     def index():
         if request.method == 'POST' and request.form['videoUrl']:
-            script.download(videoURLs=request.form['videoUrl'], formatSelector=request.form['selectFormat'])
+            script.download(
+                videoURLs=request.form['videoUrl'],
+                formatSelector=request.form['selectFormat'],
+                zip=bool(request.form.get('addToZip'))
+            )
             return redirect(url_for('list'))
         return render_template('index.html', diskFreeSpaceAndTotal=script.df())
 

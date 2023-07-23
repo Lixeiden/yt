@@ -5,6 +5,7 @@ from yt_dlp.utils import YoutubeDLError
 import os
 import settings
 import time
+import zipfile
 
 
 def dir_listing(path):
@@ -17,8 +18,7 @@ def df():  # return list [free_disk_space, total_disk_space]
     return [res.f_bavail * res.f_frsize, res.f_blocks * res.f_frsize]  # Free blocks available to non-super user * Fundamental file system block size, Total number of blocks in the filesystem * Fundamental file system block size; bytes
 
 
-def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOptions.copy()):
-
+def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOptions.copy(), zip=False):
     # Setting up logging
     logger = logging.getLogger(f'yt-dlp_func_{time.time()}')  # generate unique logger name
     logger.setLevel(logging.DEBUG)
@@ -28,11 +28,14 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
 
     dwnOptions['format'] = settings.formatTranslate[formatSelector]
     dwnOptions['logger'] = logger
+    video_files = []
 
     def replace_hook(status):
         if status['status'] == 'finished':
             new_filename = status['filename'].replace('#', 'N')
             os.rename(status['filename'], new_filename)
+            if zip:
+                video_files.append(new_filename)
 
     dwnOptions['progress_hooks'] = [replace_hook]
 
@@ -46,6 +49,15 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
             with YoutubeDL(dwnOptions) as ydl:
                 ydl.download(videoURLs)
 
+    # If zip flag is True, zip all downloaded videos
+    if zip and video_files:
+        # Generate unique name for zip file based on timestamp and number of files
+        timestamp = int(time.time())
+        zip_filename = f'{settings.videosDir}/session_{timestamp}_{len(video_files)}.zip'
+        with zipfile.ZipFile(zip_filename, 'w', compression=zipfile.ZIP_STORED) as zipf:
+            for file in video_files:
+                zipf.write(file)
+
     # Clean up the logger
     handler.close()
     logger.removeHandler(handler)
@@ -54,4 +66,5 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
 if __name__ == "__main__":
     user_url = input("URL: ")
     user_format = input(f"format {{{', '.join(settings.formatTranslate.keys())}}}: ")
-    download(videoURLs=user_url, formatSelector=user_format)
+    user_iszip = input("add to zip? (y/n)").lower() == 'y'
+    download(videoURLs=user_url, formatSelector=user_format, zip=user_iszip)

@@ -12,6 +12,7 @@ services:
       - type: bind
         source: ${LOG_PATH}
         target: /app/logs
+    restart: unless-stopped
 
   nginx:
     build: ./nginx
@@ -23,3 +24,4 @@ services:
         target: /videos
     depends_on:
       - flaskapp
+    restart: unless-stopped

@@ -43,7 +43,7 @@ def download(videoURLs, formatSelector='best', dwnOptions=settings.defaultOption
         with YoutubeDL(dwnOptions) as ydl:
             ydl.download(videoURLs)
     except YoutubeDLError as e:
-        if 'File name too long' in str(e):
+        if 'File name too long' in str(e) or 'Errno 74' in str(e):
             logger.warning('Trying a shorter file name...')
             dwnOptions['outtmpl'] = settings.shortFilenameTemplate
             with YoutubeDL(dwnOptions) as ydl:
